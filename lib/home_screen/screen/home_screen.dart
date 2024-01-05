@@ -13,8 +13,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    super.initState();
     BlocProvider.of<MusicSearchBloc>(context).add(MusicLoadingDate());
+    super.initState();
   }
 
   @override
@@ -43,14 +43,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisCount: 1),
                 itemCount: state.musicList.length,
                 itemBuilder: (context, index) {
+                  print(state.musicList[index].data![index].title![index]);
                   return Container(
                     child: Image(
-                        image: NetworkImage(state.musicList[index].md5Image!)),
+                      image: NetworkImage(
+                          state.musicList[index].data![index].md5Image!),
+                      width: 30,
+                      height: 30,
+                    ),
                   );
                 },
               );
             }
             if (state is MusicError) {
+              
               return const Center(
                 child: Icon(
                   Icons.error,
@@ -62,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               gridDelegate:
                   SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
               itemBuilder: (context, index) {
+                
                 return Card();
               },
             );

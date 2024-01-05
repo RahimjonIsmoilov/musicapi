@@ -1,5 +1,7 @@
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:musicapi/home_screen/api/music_model.dart';
 import 'package:musicapi/home_screen/api/music_repository.dart';
 
 part 'music_search_event.dart';

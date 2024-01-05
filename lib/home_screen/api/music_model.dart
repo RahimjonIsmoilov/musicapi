@@ -1,28 +1,203 @@
 class MusicSearch {
-  String? title;
-  String? picture;
-  String? md5Image;
+  List<Data>? data;
+  int? total;
+  String? next;
 
-  MusicSearch({
-    this.title,
-    this.picture,
-    this.md5Image,
-  });
+  MusicSearch({this.data, this.total, this.next});
 
   MusicSearch.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
-    picture = json['picture'];
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(new Data.fromJson(v));
+      });
+    }
+    total = json['total'];
+    next = json['next'];
+  }
 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    data['total'] = this.total;
+    data['next'] = this.next;
+    return data;
+  }
+}
+
+class Data {
+  String? title;
+  String? titleShort;
+  String? titleVersion;
+  String? link;
+
+  int? rank;
+  bool? explicitLyrics;
+  int? explicitContentLyrics;
+  int? explicitContentCover;
+  String? preview;
+  String? md5Image;
+  Artist? artist;
+  Album? album;
+
+  Data({
+    this.title,
+    this.titleShort,
+    this.titleVersion,
+    this.link,
+    this.rank,
+    this.explicitLyrics,
+    this.explicitContentLyrics,
+    this.explicitContentCover,
+    this.preview,
+    this.md5Image,
+    this.artist,
+    this.album,
+  });
+
+  Data.fromJson(Map<String, dynamic> json) {
+    title = json['title'];
+    titleShort = json['title_short'];
+    titleVersion = json['title_version'];
+    link = json['link'];
+
+    rank = json['rank'];
+    explicitLyrics = json['explicit_lyrics'];
+    explicitContentLyrics = json['explicit_content_lyrics'];
+    explicitContentCover = json['explicit_content_cover'];
+    preview = json['preview'];
     md5Image = json['md5_image'];
+    artist =
+        json['artist'] != null ? new Artist.fromJson(json['artist']) : null;
+    album = json['album'] != null ? new Album.fromJson(json['album']) : null;
+    ;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
 
     data['title'] = this.title;
-    data['picture'] = this.picture;
+    data['title_short'] = this.titleShort;
+    data['title_version'] = this.titleVersion;
+    data['link'] = this.link;
 
+    data['rank'] = this.rank;
+    data['explicit_lyrics'] = this.explicitLyrics;
+    data['explicit_content_lyrics'] = this.explicitContentLyrics;
+    data['explicit_content_cover'] = this.explicitContentCover;
+    data['preview'] = this.preview;
     data['md5_image'] = this.md5Image;
+    if (this.artist != null) {
+      data['artist'] = this.artist!.toJson();
+    }
+    if (this.album != null) {
+      data['album'] = this.album!.toJson();
+    }
+
+    return data;
+  }
+}
+
+class Artist {
+  String? id;
+  String? name;
+  String? link;
+  String? picture;
+  String? pictureSmall;
+  String? pictureMedium;
+  String? pictureBig;
+  String? pictureXl;
+  String? tracklist;
+
+  Artist({
+    this.id,
+    this.name,
+    this.link,
+    this.picture,
+    this.pictureSmall,
+    this.pictureMedium,
+    this.pictureBig,
+    this.pictureXl,
+    this.tracklist,
+  });
+
+  Artist.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    link = json['link'];
+    picture = json['picture'];
+    pictureSmall = json['picture_small'];
+    pictureMedium = json['picture_medium'];
+    pictureBig = json['picture_big'];
+    pictureXl = json['picture_xl'];
+    tracklist = json['tracklist'];
+    ;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['link'] = this.link;
+    data['picture'] = this.picture;
+    data['picture_small'] = this.pictureSmall;
+    data['picture_medium'] = this.pictureMedium;
+    data['picture_big'] = this.pictureBig;
+    data['picture_xl'] = this.pictureXl;
+    data['tracklist'] = this.tracklist;
+
+    return data;
+  }
+}
+
+class Album {
+  String? id;
+  String? title;
+  String? cover;
+  String? coverSmall;
+  String? coverMedium;
+  String? coverBig;
+  String? coverXl;
+  String? md5Image;
+  String? tracklist;
+
+  Album({
+    this.id,
+    this.title,
+    this.cover,
+    this.coverSmall,
+    this.coverMedium,
+    this.coverBig,
+    this.coverXl,
+    this.md5Image,
+    this.tracklist,
+  });
+
+  Album.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    cover = json['cover'];
+    coverSmall = json['cover_small'];
+    coverMedium = json['cover_medium'];
+    coverBig = json['cover_big'];
+    coverXl = json['cover_xl'];
+    md5Image = json['md5_image'];
+    tracklist = json['tracklist'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['cover'] = this.cover;
+    data['cover_small'] = this.coverSmall;
+    data['cover_medium'] = this.coverMedium;
+    data['cover_big'] = this.coverBig;
+    data['cover_xl'] = this.coverXl;
+    data['md5_image'] = this.md5Image;
+    data['tracklist'] = this.tracklist;
 
     return data;
   }

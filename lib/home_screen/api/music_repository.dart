@@ -4,7 +4,6 @@ import 'package:musicapi/home_screen/api/music_model.dart';
 import 'package:http/http.dart' as http;
 
 class MusicRepostory {
-  get md5Image => null;
 
   Future<List<MusicSearch>> getData() async {
     List<MusicSearch>? musicList = [];
