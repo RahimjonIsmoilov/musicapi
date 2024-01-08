@@ -43,35 +43,38 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisCount: 1),
                 itemCount: state.musicList.length,
                 itemBuilder: (context, index) {
-                  print(state.musicList[index].data![index].title![index]);
                   return Container(
                     child: Image(
                       image: NetworkImage(
-                          state.musicList[index].data![index].md5Image!),
+                          state.musicList[index].artist?.picture ?? ''),
                       width: 30,
                       height: 30,
                     ),
                   );
                 },
               );
-            }
-            if (state is MusicError) {
-              
+            } else if (state is MusicError) {
+              return Column(
+                children: [
+                  const Icon(
+                    Icons.error,
+                    size: 120,
+                  ),
+                  Text(state.message ?? "Error"),
+                ],
+              );
+            } else {
               return const Center(
-                child: Icon(
-                  Icons.error,
-                  size: 120,
-                ),
+                child: CircularProgressIndicator(),
               );
             }
-            return GridView.builder(
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
-              itemBuilder: (context, index) {
-                
-                return Card();
-              },
-            );
+            // return GridView.builder(
+            //   gridDelegate:
+            //       SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
+            //   itemBuilder: (context, index) {
+            //     return Card();
+            //   },
+            // );
           },
         ));
   }

@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:musicapi/home_screen/api/music_model.dart';
@@ -19,10 +18,10 @@ class MusicSearchBloc extends Bloc<MusicSearchEvent, MusicSearchState> {
         if (result != []) {
           emit(MusicSucces(musicList: result));
         } else {
-          emit(MusicError());
+          emit(MusicError(message: "Music list is empty"));
         }
       } catch (e) {
-        emit(MusicError());
+        emit(MusicError(message: e.toString()));
       }
     });
   }

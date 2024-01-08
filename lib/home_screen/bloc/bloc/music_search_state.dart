@@ -13,4 +13,7 @@ class MusicSucces extends MusicSearchState {
   MusicSucces({required this.musicList});
 }
 
-class MusicError extends MusicSearchState {}
+class MusicError extends MusicSearchState {
+  final String? message;
+  MusicError({this.message});
+}
